@@ -4,35 +4,98 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Il Battesimo di Lorenzo</title>
-  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: 'Cinzel', serif;
+      background-color: #f5f5f0;
+      color: #4a4a3c;
+      text-align: center;
+      padding: 20px;
+    }
+    h2 {
+      color: #6b6b58;
+    }
+    #countdown {
+      font-size: 1.5em;
+      margin: 20px 0;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    input {
+      padding: 8px;
+      width: 200px;
+    }
+    #guests div {
+      margin: 5px 0;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #d9c2a3;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
-  <section class="hero">
-    <h1>Il Battesimo di Lorenzo</h1>
-    <p>Mercoledì 26 agosto, ore 18:00</p>
-    <p>Basilica dei Santi Cesidio e Rufino</p>
-    <a href="https://maps.google.com/?q=Via Duca degli Abruzzi 2, Trasacco AQ" target="_blank">Apri la mappa della Basilica</a>
+  <section id="countdown-section">
+    <h2>Manca al battesimo</h2>
+    <div id="countdown">
+      <span id="days">00</span> giorni
+      <span id="hours">00</span> ore
+      <span id="minutes">00</span> minuti
+      <span id="seconds">00</span> secondi
+    </div>
   </section>
 
-  <section class="reception">
-    <h2>Il ricevimento proseguirà presso:</h2>
-    <p>Ristorante Il Granaio</p>
-    <a href="https://maps.google.com/?q=Via IV Novembre 49, Trasacco AQ" target="_blank">Apri la mappa del Ristorante</a>
-  </section>
-
-  <section class="countdown">
-    <h2>Manca poco ad un giorno speciale</h2>
-    <div id="timer">00:00:00</div>
-  </section>
-
-  <section class="rsvp">
-    <h2>Conferma la tua presenza su WhatsApp</h2>
-    <form id="rsvpForm">
-      <input type="text" id="name" placeholder="Il tuo nome" required>
+  <section id="rsvp-section">
+    <h2>Conferma la tua presenza</h2>
+    <form id="rsvp-form">
+      <input type="text" id="name" placeholder="Nome" required>
+      <input type="text" id="surname" placeholder="Cognome" required>
+      <div id="guests">
+        <!-- Ospiti aggiuntivi verranno aggiunti qui -->
+      </div>
+      <button type="button" id="add-guest">Aggiungi ospite</button>
       <button type="submit">Invia conferma</button>
     </form>
   </section>
 
-  <script src="script.js"></script>
-</body>
-</html>
+  <script>
+    // Countdown al 26 agosto 2026 alle 18:00
+    const eventDate = new Date('2026-08-26T18:00:00').getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = eventDate - now;
+
+      if (distance < 0) {
+        document.getElementById('countdown').innerHTML = "L'evento è iniziato!";
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById('days').textContent = days.toString().padStart(2, '0');
+      document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+      document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+      document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    // Aggiunta ospiti
+    document.getElementById('add-guest').addEventListener('click', function () {
+      const guestsDiv = document.getElementById('guests');
+      const guestInput = document.createElement('input');
+      guestInput.type = 'text';
+      guestInput.placeholder =
