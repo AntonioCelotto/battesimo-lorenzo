@@ -1,0 +1,27 @@
+body {
+  font-family: 'Cinzel', serif;
+  background-color: #f5f5f0;
+  color: #4a4a3c;
+  text-align: center;
+  padding: 20px;
+}
+
+h1, h2 {
+  color: #6b6b58;
+}
+
+a {
+  color: #4a4a3c;
+  text-decoration: none;
+  display: block;
+  margin: 10px 0;
+}
+
+button {
+  background-color: #d9c2a3;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
