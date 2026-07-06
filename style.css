@@ -26,11 +26,14 @@ body{
 }
 
 body::before{
-  content:"";
-  position:fixed;
-  inset:0;
-  background:url("assets/background.png") center top/cover no-repeat;
-  z-index:-2;
+    content:"";
+    position:fixed;
+    inset:0;
+    background-image:url("background.png");
+    background-position:center top;
+    background-repeat:no-repeat;
+    background-size:cover;
+    z-index:-2;
 }
 
 body::after{
