@@ -3,99 +3,97 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>Il Battesimo di Lorenzo</title>
-  <style>
-    body {
-      font-family: 'Cinzel', serif;
-      background-color: #f5f5f0;
-      color: #4a4a3c;
-      text-align: center;
-      padding: 20px;
-    }
-    h2 {
-      color: #6b6b58;
-    }
-    #countdown {
-      font-size: 1.5em;
-      margin: 20px 0;
-    }
-    form {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-    }
-    input {
-      padding: 8px;
-      width: 200px;
-    }
-    #guests div {
-      margin: 5px 0;
-    }
-    button {
-      padding: 10px 20px;
-      background-color: #d9c2a3;
-      color: #fff;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-  </style>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
-  <section id="countdown-section">
-    <h2>Manca al battesimo</h2>
-    <div id="countdown">
-      <span id="days">00</span> giorni
-      <span id="hours">00</span> ore
-      <span id="minutes">00</span> minuti
-      <span id="seconds">00</span> secondi
+
+  <section class="hero">
+    <div class="hero-content">
+      <p class="small-title">Siete invitati al</p>
+
+      <h1>
+        <span>Il Battesimo di</span>
+        <strong>Lorenzo</strong>
+      </h1>
+
+      <div class="hero-line"></div>
+
+      <p class="date">Mercoledì 26 Agosto 2026</p>
+      <p class="time">Ore 18:00</p>
+
+      <a href="#rsvp" class="btn primary">Conferma presenza</a>
     </div>
   </section>
 
-  <section id="rsvp-section">
+  <section class="card countdown-section">
+    <h2>Manca poco...</h2>
+    <p class="intro">Il dono più bello sarà condividere con voi questo giorno speciale.</p>
+
+    <div class="countdown">
+      <div><strong id="days">00</strong><span>Giorni</span></div>
+      <div><strong id="hours">00</strong><span>Ore</span></div>
+      <div><strong id="minutes">00</strong><span>Minuti</span></div>
+      <div><strong id="seconds">00</strong><span>Secondi</span></div>
+    </div>
+  </section>
+
+  <section class="card location-card">
+    <div class="icon">⛪</div>
+    <h2>La Cerimonia</h2>
+    <h3>Basilica dei Santi Cesidio e Rufino</h3>
+    <p>Via Duca degli Abruzzi 2<br>67059 Trasacco (AQ)</p>
+
+    <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Via%20Duca%20degli%20Abruzzi%202%2067059%20Trasacco%20AQ">
+      Apri Google Maps
+    </a>
+  </section>
+
+  <section class="card location-card">
+    <div class="icon">🍽️</div>
+    <h2>Il Ricevimento</h2>
+    <h3>Ristorante Il Granaio</h3>
+    <p>Via IV Novembre 49<br>67059 Trasacco (AQ)</p>
+
+    <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Via%20IV%20Novembre%2049%2067059%20Trasacco%20AQ">
+      Apri Google Maps
+    </a>
+  </section>
+
+  <section class="card rsvp-card" id="rsvp">
     <h2>Conferma la tua presenza</h2>
-    <form id="rsvp-form">
-      <input type="text" id="name" placeholder="Nome" required>
-      <input type="text" id="surname" placeholder="Cognome" required>
-      <div id="guests">
-        <!-- Ospiti aggiuntivi verranno aggiunti qui -->
+    <p class="intro">La conferma arriverà direttamente su WhatsApp.</p>
+
+    <form id="rsvpForm">
+      <input id="name" type="text" placeholder="Nome" required>
+      <input id="surname" type="text" placeholder="Cognome" required>
+      <input id="phone" type="tel" placeholder="Telefono WhatsApp" required>
+
+      <div class="guest-head">
+        <span>Altri ospiti</span>
+        <button type="button" id="addGuest" class="btn light">+ Aggiungi ospite</button>
       </div>
-      <button type="button" id="add-guest">Aggiungi ospite</button>
-      <button type="submit">Invia conferma</button>
+
+      <div id="guestList"></div>
+
+      <textarea id="notes" placeholder="Messaggio o note facoltative"></textarea>
+
+      <button type="submit" class="btn primary">Invia conferma su WhatsApp</button>
     </form>
   </section>
 
-  <script>
-    // Countdown al 26 agosto 2026 alle 18:00
-    const eventDate = new Date('2026-08-26T18:00:00').getTime();
+  <footer>
+    <p>Ogni sorriso renderà ancora più speciale questo giorno.</p>
+    <span>♡</span>
+  </footer>
 
-    function updateCountdown() {
-      const now = new Date().getTime();
-      const distance = eventDate - now;
-
-      if (distance < 0) {
-        document.getElementById('countdown').innerHTML = "L'evento è iniziato!";
-        return;
-      }
-
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-      document.getElementById('days').textContent = days.toString().padStart(2, '0');
-      document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
-      document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
-      document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
-    }
-
-    setInterval(updateCountdown, 1000);
-    updateCountdown();
-
-    // Aggiunta ospiti
-    document.getElementById('add-guest').addEventListener('click', function () {
-      const guestsDiv = document.getElementById('guests');
-      const guestInput = document.createElement('input');
-      guestInput.type = 'text';
-      guestInput.placeholder =
+  <script src="script.js"></script>
+</body>
+</html>
