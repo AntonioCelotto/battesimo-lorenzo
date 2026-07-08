@@ -1,6 +1,6 @@
 const CONFIG = {
   eventDate: "2026-08-26T18:00:00+02:00",
-  whatsappNumber: "3938850092"
+  whatsappNumber: "3274082630"
 };
 
 function pad(value){
